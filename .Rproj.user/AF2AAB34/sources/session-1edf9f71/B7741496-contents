@@ -1,0 +1,9 @@
+# Set to folder containing app.R
+setwd("C:/Users/kaggwa/Desktop/new11/shinyapp")     
+library(rsconnect)
+rsconnect::deployApp()
+rsconnect::setAccountInfo(name='kaggwamusa',
+                          token='190E2BEDD188C39C216FD001168B6D56',
+                          secret='SSkT+7MW+BhagmM+ea42HG2jLihZI3IdB6ziXJIH')
+sliderInput("num", "Choose a number",100)
+shiny::runApp()
