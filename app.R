@@ -1,21 +1,23 @@
+# ui.R
 library(shiny)
-
 ui <- fluidPage(
-  titlePanel("Hello Shiny App"),
+  titlePanel("Housing Price Analysis (Ames & California)"),
   sidebarLayout(
     sidebarPanel(
-      sliderInput("num", "Pick a number", 1, 100, 50)
+      h4("Summary"),
+      verbatimTextOutput("summaryText"),
+      h4("Model RMSE"),
+      verbatimTextOutput("modelMetrics")
     ),
     mainPanel(
-      textOutput("result")
+      tabsetPanel(
+        tabPanel("Sale Price by Neighborhood", plotOutput("barPlot")),
+        tabPanel("Sale vs Liv Area", plotOutput("scatterPlot")),
+        tabPanel("Boxplot by Bedrooms", plotOutput("bedroomBoxPlot")),
+        tabPanel("Liv Area by Neighborhood", plotOutput("areaBoxPlot")),
+        tabPanel("Feature Importance", plotOutput("importancePlot")),
+        tabPanel("Correlation Heatmap", plotOutput("correlationHeatmap"))
+      )
     )
   )
 )
-
-server <- function(input, output) {
-  output$result <- renderText({
-    paste("You selected", input$num)
-  })
-}
-
-shinyApp(ui = ui, server = server)
